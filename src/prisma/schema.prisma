@@ -1,0 +1,69 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Product {
+  id              Int                     @id @default(autoincrement())
+  name            String                  @db.VarChar(255)
+  description     String?                  @db.Text
+  basePrice       Decimal                 @db.Decimal(10, 2) @map("base_price")
+  category        String?                 @db.VarChar(50)
+  createdAt       DateTime?                @map("created_at") @db.Timestamp(0) @default(now())
+  updatedAt       DateTime?                @db.Timestamp(0) @map("updated_at")
+  characteristics ProductCharacteristic[]
+  rules           ProductRule[]
+  @@map("products")
+}
+
+model ProductCharacteristic {
+  id          Int                     @id @default(autoincrement())
+  productId   Int                     @map("product_id")
+  name        String              
+  createdAt   DateTime?               @db.Timestamp(0) @map("created_at") @default(now())
+  updatedAt   DateTime?               @db.Timestamp(0) @map("updated_at") @updatedAt
+  product     Product                 @relation(fields: [productId], references: [id])
+  options     CharacteristicOption[]
+
+  restrictedByRules ProductRule[]           @relation("RestrictedCharacteristic")
+  dependsOnRules    ProductRule[]           @relation("DependsOnCharacteristic")
+
+  @@map("products_characteristics")
+}
+
+model CharacteristicOption {
+  id                Int                      @id @default(autoincrement())
+  characteristicId  Int                      @map("characteristic_id")
+  value             String
+  isInStock         Boolean?                 @default(true) @map("is_in_stock")
+  createdAt         DateTime?                @db.Timestamp(0) @map("created_at") @default(now())
+  updatedAt         DateTime?                @db.Timestamp(0) @map("updated_at") @updatedAt
+  characteristic    ProductCharacteristic    @relation(fields: [characteristicId], references: [id])
+  restrictedByRules ProductRule[]            @relation("RestrictedOption")
+  dependsOnRules    ProductRule[]            @relation("DependsOnOption")
+  @@map("characteristics_options")
+}
+
+model ProductRule {
+  id                            Int                     @id @default(autoincrement())
+  productId                     Int                     @map("product_id")
+  restrictedCharacteristicId    Int                     @map("restricted_characteristic_id")
+  restrictedOptionId            Int                     @map("restricted_option_id")
+  dependsOnCharacteristicId     Int                     @map("depends_on_characteristic_id")
+  dependsOnOptionId             Int                     @map("depends_on_option_id")
+  product                       Product                 @relation(fields: [productId], references: [id], onDelete: Cascade)
+  
+  restrictedCharacteristic      ProductCharacteristic   @relation("RestrictedCharacteristic", fields: [restrictedCharacteristicId], references: [id], onDelete: Cascade)
+  dependsOnCharacteristic       ProductCharacteristic   @relation("DependsOnCharacteristic", fields: [dependsOnCharacteristicId], references: [id], onDelete: Cascade)
+
+  restrictedOption              CharacteristicOption    @relation("RestrictedOption", fields: [restrictedOptionId], references: [id], onDelete: Cascade)
+  dependsOnOption               CharacteristicOption    @relation("DependsOnOption", fields: [dependsOnOptionId], references: [id], onDelete: Cascade)
+  
+  createdAt                     DateTime? @db.Timestamp(0) @map("created_at") @default(now())
+  updatedAt                     DateTime? @db.Timestamp(0) @map("updated_at") @updatedAt
+  @@map("products_rules")
+}
