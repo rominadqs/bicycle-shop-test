@@ -1,8 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bicycle Shop
+
+This application was made with Next.JS (Front-end and Back-end) and allows Marcus, a bicycle shop owner, to sell his bicycles. Users can navigate through the product catalog, view the product details, and add a customized bike to the shopping cart. 
+
+## Functional Description
+Users can:
+- See the full product catalog.
+- Check the product details.
+- Add to the shopping cart a product with their own unique options. 
+- See what's on their Shopping Cart.
+
+Marcus Can:
+- Add products: Configure characteristics, options and rules for each product (e.g., rim colors, wheel types).
+- Delete bicycles from the catalog.
 
 ## Getting Started
 
-First, run the development server:
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+### Requirements
+- Node.js
+- Docker
+
+### Local Development
+
+First, run the database 
+```bash
+docker-compose up
+```
+Then run the development server:
 
 ```bash
 npm run dev
@@ -16,21 +41,4 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+To check the private section go to [products/admin](http://localhost:3000/products/admin)
