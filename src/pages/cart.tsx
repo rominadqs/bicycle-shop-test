@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../store';
 import { removeItem } from '../store/cartSlice';
-import { fetchProducts, ProductCharacteristic } from '../store/productsSlice';
+import { fetchProducts } from '../store/productsSlice';
 import {
     Box,
     Button,
@@ -18,7 +19,7 @@ import {
 export default function CartPage() {
     const dispatch = useDispatch<AppDispatch>();
     const cartItems = useSelector((state: RootState) => state.cart.items);
-    const {products, loading, fetched, error} = useSelector((state: RootState) => state.products);
+    const {products, fetched} = useSelector((state: RootState) => state.products);
 
     useEffect(() => {
         if (!fetched){
@@ -38,7 +39,6 @@ export default function CartPage() {
       <List>
         {cartItems.map((item, index) => {
             const product = getProductDetails(item.productId);
-            console.log("product", product);
             if (!product) return null;
             const characteristicMap: { [key: number]: string } = {};
             const OptionsMap: { [key: number]: string } = {};
@@ -48,9 +48,8 @@ export default function CartPage() {
                     OptionsMap[options.id] = options.value;
                 }
             }
-            console.log("characteristicMap", characteristicMap);
             return(
-                <Card key={item.productId} variant="outlined" sx={{ marginBottom: 2 }}>
+                <Card key={index} variant="outlined" sx={{ marginBottom: 2 }}>
                     <CardContent>
                     <Typography variant="h6">{product.name}</Typography>
                     <Typography variant="body2" color="textSecondary">
@@ -70,7 +69,7 @@ export default function CartPage() {
                         <Button
                         variant="contained"
                         color="secondary"
-                        onClick={() => dispatch(removeItem(item.productId))}
+                        onClick={() => dispatch(removeItem(index))}
                         >
                         Remove
                         </Button>
@@ -88,11 +87,12 @@ export default function CartPage() {
             cartItems
                 .reduce((total, item) => {
                 const product = getProductDetails(item.productId);
-                return total + (product ? product.basePrice : 0);
+                return total + Number((product ? product.basePrice : 0));
                 }, 0)
             }
         </Typography>
       </Box>
+      <Button variant="outlined" href="/" LinkComponent={Link}>Home</Button>
     </Box>
   );
 };

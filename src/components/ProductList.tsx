@@ -1,6 +1,4 @@
-import  React, { ReactNode } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../store";
+import  React from "react";
 import ProductCard from "../components/ProductCard";
 import { Product } from "../types";
 import { Grid2 as Grid, Box, Typography } from "@mui/material";

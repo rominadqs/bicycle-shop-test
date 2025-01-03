@@ -1,6 +1,6 @@
 # Bicycle Shop
 
-This application was made with Next.JS (Front-end and Back-end) and allows Marcus, a bicycle shop owner, to sell his bicycles. Users can navigate through the product catalog, view the product details, and add a customized bike to the shopping cart. 
+This application was made with Next.JS (Front-end and Back-end) and allows Marcus, a bicycle shop owner, to sell his bicycles. The application focus on allowing Marcus to add any type of products and not only bicycle. Users can navigate through the product catalog, view the product details, and add a customized bike to the shopping cart.  
 
 ## Functional Description
 Users can:
@@ -12,6 +12,7 @@ Users can:
 Marcus Can:
 - Add products: Configure characteristics, options and rules for each product (e.g., rim colors, wheel types).
 - Delete bicycles from the catalog.
+
 
 ## Getting Started
 

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { Option, NewProduct } from "../types";
+import { Option, NewProduct, Rule } from "../types";
 
 export interface ProductCharacteristic {
   id: number;
@@ -15,7 +15,7 @@ export interface Product {
   basePrice: number;
   category: string;
   characteristics: ProductCharacteristic[];
-  rules: any[];
+  rules: Rule[];
 }
 
 export interface ProductsState {

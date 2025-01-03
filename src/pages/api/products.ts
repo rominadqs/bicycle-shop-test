@@ -21,9 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             break;
         case "POST":
             try {
-                console.log(req.body);
                 const { name, description, basePrice, category, characteristics, rules } = req.body;
-                console.log(characteristics);
                 const product = await prisma.product.create({
                     data: {
                         name,
@@ -86,7 +84,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
                 return res.status(201).json(product);
             } catch (error) {
-                console.error('****Error creating product:', error);
+                console.error('Error creating product:', error);
                 return res.status(500).json({ status: Status.Error, message: 'Internal Server Error' });
             }
         default:

@@ -1,11 +1,10 @@
-import  React, { ReactNode } from "react";
+import  React from "react";
 import Link from "next/link";
 import {
   Card,
   CardContent,
   Typography,
   Button,
-  Grid2 as Grid
 } from "@mui/material";
 
 interface ProductCardProps {

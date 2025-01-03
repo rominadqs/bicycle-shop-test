@@ -296,7 +296,7 @@ export default function Admin() {
         <Typography variant="h4" gutterBottom>
           Manage Products
         </Typography>
-        <ProductList products={products} buttonProps={{label: "View Details", action: handleDeleteProduct}}/>
+        <ProductList products={products} buttonProps={{label: "Delete", action: handleDeleteProduct}}/>
       </Box>
     </Container>
   );

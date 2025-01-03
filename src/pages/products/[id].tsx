@@ -20,7 +20,6 @@ import {
 export default function ProductDetails() {
     const router = useRouter();
     const { id } = router.query;
-    console.log(id);
 
     const [selectedOptions, setSelectedOptions] = useState<Record<number, number | null>>({});
     const [validationError, setValidationError] = useState<string | null>(null);
@@ -47,7 +46,6 @@ export default function ProductDetails() {
           ...prev,
           [characteristicId]: optionId,
         }));
-        console.log(selectedOptions);
     };
 
     const isOptionDisabled = (rules: Rule[], characteristicId: number, optionId: number): boolean => {
@@ -69,7 +67,7 @@ export default function ProductDetails() {
     
     const validateSelection = () => {
         const rules = product.rules;
-        console.log("rules", rules);
+
         for (const rule of rules) {
           const restrictedCharacteristic = rule.restrictedCharacteristicId;
           const restrictedOption = rule.restrictedOptionId;
